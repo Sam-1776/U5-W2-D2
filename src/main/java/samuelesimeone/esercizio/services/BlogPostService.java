@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import samuelesimeone.esercizio.entities.BlogPost;
 import samuelesimeone.esercizio.exceptions.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class BlogPostService {
@@ -22,6 +19,8 @@ public class BlogPostService {
 
     public BlogPost save(BlogPost post){
         post.setId(rdm.nextLong(1, 100000));
+        post.setCover("https://picsum.photos/" + rdm.nextInt(100, 200) + "/" + rdm.nextInt(200, 300));
+        post.setTempoDiLettura(rdm.nextDouble(1.0, 60.0));
         this.blogPosts.add(post);
         return post;
     }
@@ -41,6 +40,8 @@ public class BlogPostService {
     }
 
     public BlogPost update(long id, BlogPost postUp){
+        postUp.setCover("https://picsum.photos/" + rdm.nextInt(100, 200) + "/" + rdm.nextInt(200, 300));
+        postUp.setTempoDiLettura(rdm.nextDouble(1.0, 60.0));
         BlogPost found = findById(id);
         found.setCategoria(postUp.getCategoria());
         found.setContenuto(postUp.getContenuto());
